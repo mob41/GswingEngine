@@ -1,4 +1,4 @@
-package com.github.mob41.gswingengine.spirit;
+package com.github.mob41.gswingengine.sprite;
 
 import java.awt.Graphics;
 import java.awt.Point;

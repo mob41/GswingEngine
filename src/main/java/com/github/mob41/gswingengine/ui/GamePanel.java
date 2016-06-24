@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.github.mob41.gswingengine.input.InputHandler;
-import com.github.mob41.gswingengine.spirit.Sprite;
-import com.github.mob41.gswingengine.spirit.SpriteManager;
+import com.github.mob41.gswingengine.sprite.Sprite;
+import com.github.mob41.gswingengine.sprite.SpriteManager;
 
 public class GamePanel extends JPanel {
 	

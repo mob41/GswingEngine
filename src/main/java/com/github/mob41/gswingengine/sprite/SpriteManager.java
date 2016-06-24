@@ -1,4 +1,4 @@
-package com.github.mob41.gswingengine.spirit;
+package com.github.mob41.gswingengine.sprite;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -124,7 +124,7 @@ public class SpriteManager {
 	
 	public static BufferedImage getImageFromClass(String fileName){
 		try {
-			return ImageIO.read(TestSpirit.class.getClassLoader().getResourceAsStream(fileName));
+			return ImageIO.read(TestSprite.class.getClassLoader().getResourceAsStream(fileName));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
