@@ -1,6 +1,8 @@
 package com.github.mob41.gswingengine.spirit;
 
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public abstract class Spirit {
@@ -11,10 +13,13 @@ public abstract class Spirit {
 	
 	private BufferedImage frame;
 	
-	public Spirit(String name, Point location, BufferedImage frame){
+	public Spirit(String name, Point location){
+		if (location == null){
+			System.err.println("GswingEngine: SpiritManager: Location cannot be null.");
+			System.exit(-1);
+		}
 		this.name = name;
 		this.location = location;
-		this.frame = frame;
 	}
 	
 	public String getName(){
@@ -57,11 +62,50 @@ public abstract class Spirit {
 		return location.y + frame.getWidth();
 	}
 	
-	public boolean isCollisionWith(Spirit anotherSpirit){
-		return
+	public boolean isOverlapping(Spirit anotherSpirit){
+		return isInArea(getLeftX(), getRightX(), getUpY(), getDownY(), anotherSpirit.location);
 	}
 	
-	public void moveLeft(){
-		
+	public boolean isCollisionWith(Spirit anotherSpirit){
+		return isInArea(getLeftX(), getRightX(), getUpY(), getDownY(), anotherSpirit.location);
+	}
+	
+	public void moveLeft(int percentage){
+		location.x -= frame.getWidth() * percentage / 100 * 0.5;
+	}
+	
+	public void moveRight(int percentage){
+		location.x += frame.getWidth() * percentage / 100 * 0.5;
+	}
+	
+	public void moveUp(int percentage){
+		location.y -= frame.getHeight() * percentage / 100 * 0.5;
+	}
+	
+	public void moveDown(int percentage){
+		location.y += frame.getHeight() * percentage / 100 * 0.5;
+	}
+	
+	public void onKeyPressed(KeyEvent arg0){
+		return;
+	}
+	
+	public void onKeyReleased(KeyEvent arg0){
+		return;
+	}
+	
+	public void onKeyTyped(KeyEvent arg0){
+		return;
+	}
+	
+	public static boolean isInArea(int areaLeftX, int areaRightX, int areaUpY, int areaDownY, Point location){
+		return areaLeftX > location.x &&
+				areaRightX < location.x &&
+				areaUpY > location.y &&
+				areaDownY < location.y;
+	}
+	
+	public final void drawThis(Graphics g){
+		g.drawImage(frame, getLeftX(), getUpY(), null);
 	}
 }

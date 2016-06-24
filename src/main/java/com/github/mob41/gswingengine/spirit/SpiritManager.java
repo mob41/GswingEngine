@@ -1,5 +1,6 @@
 package com.github.mob41.gswingengine.spirit;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +34,23 @@ public class SpiritManager {
 	
 	public Spirit getSpirit(int index){
 		return spiritList.get(index);
+	}
+	
+	public void callOnKeyPressed(KeyEvent arg0){
+		for (Spirit spirit : spiritList){
+			spirit.onKeyPressed(arg0);
+		}
+	}
+	
+	public void callOnKeyReleased(KeyEvent arg0){
+		for (Spirit spirit : spiritList){
+			spirit.onKeyReleased(arg0);
+		}
+	}
+	
+	public void callOnKeyTyped(KeyEvent arg0){
+		for (Spirit spirit : spiritList){
+			spirit.onKeyTyped(arg0);
+		}
 	}
 }
