@@ -3,6 +3,7 @@ package com.github.mob41.gswingengine.spirit;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public abstract class Spirit {
@@ -42,8 +43,20 @@ public abstract class Spirit {
 		this.location = point;
 	}
 	
+	public void setCenterPos(Point point){
+		setLocation(new Point(point.x - getWidth() / 2, point.y - getHeight() / 2));
+	}
+	
 	public void setFrame(BufferedImage frame){
 		this.frame = frame;
+	}
+	
+	public int getWidth(){
+		return frame.getWidth();
+	}
+	
+	public int getHeight(){
+		return frame.getHeight();
 	}
 	
 	public int getLeftX(){
@@ -60,6 +73,10 @@ public abstract class Spirit {
 	
 	public int getDownY(){
 		return location.y + frame.getWidth();
+	}
+	
+	public Point getCenterPos(){
+		return new Point((getLeftX() + getRightX()) / 2, (getUpY() + getDownY()) / 2);
 	}
 	
 	public boolean isOverlapping(Spirit anotherSpirit){
@@ -86,6 +103,8 @@ public abstract class Spirit {
 		location.y += frame.getHeight() * percentage / 100 * 0.5;
 	}
 	
+//Events
+	
 	public void onKeyPressed(KeyEvent arg0){
 		return;
 	}
@@ -96,6 +115,69 @@ public abstract class Spirit {
 	
 	public void onKeyTyped(KeyEvent arg0){
 		return;
+	}
+	
+	public void onMouseDragged(MouseEvent arg0) {
+		return;
+	}
+
+	public void onMouseDraggedOverThis(MouseEvent arg0) {
+		return;
+	}
+
+	public void onMouseMoved(MouseEvent arg0) {
+		return;
+	}
+
+	public void onMouseMovedOverThis(MouseEvent arg0) {
+		return;
+	}
+
+	public void onMouseClicked(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseClickedOverThis(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseEntered(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseEnteredOverThis(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseExited(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseExitedOverThis(MouseEvent e) {
+		return;
+	}
+
+	public void onMousePressed(MouseEvent e) {
+		return;
+	}
+
+	public void onMousePressedOverThis(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseReleased(MouseEvent e) {
+		return;
+	}
+
+	public void onMouseReleasedOverThis(MouseEvent e) {
+		return;
+	}
+	
+	public boolean isPointOverlappingThis(Point location){
+		return getLeftX() > location.x &&
+				getRightX() < location.x &&
+				getUpY() > location.y &&
+				getDownY() < location.y;
 	}
 	
 	public static boolean isInArea(int areaLeftX, int areaRightX, int areaUpY, int areaDownY, Point location){

@@ -33,7 +33,11 @@ public class GamePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public GamePanel(JFrame frame) {
-		frame.addKeyListener(new InputHandler());
+		InputHandler ih = new InputHandler(SpiritManager.getInstance());
+		frame.addKeyListener(ih);
+		frame.addFocusListener(ih);
+		frame.addMouseListener(ih);
+		frame.addMouseMotionListener(ih);
 		this.frame = frame;
 		thread = new RenderThread(this);
 		thread.start();

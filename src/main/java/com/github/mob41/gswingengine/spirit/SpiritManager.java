@@ -1,6 +1,7 @@
 package com.github.mob41.gswingengine.spirit;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +56,69 @@ public class SpiritManager {
 	public void callOnKeyTyped(KeyEvent arg0){
 		for (Spirit spirit : spiritList){
 			spirit.onKeyTyped(arg0);
+		}
+	}
+	
+	public void callOnMouseDragged(MouseEvent arg0) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseDragged(arg0);
+			if (spirit.isPointOverlappingThis(arg0.getPoint())){
+				spirit.onMouseDraggedOverThis(arg0);
+			}
+		}
+	}
+
+	public void callOnMouseMoved(MouseEvent arg0) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseMoved(arg0);
+			if (spirit.isPointOverlappingThis(arg0.getPoint())){
+				spirit.onMouseMovedOverThis(arg0);
+			}
+		}
+	}
+
+	public void callOnMouseClicked(MouseEvent e) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseClicked(e);
+			if (spirit.isPointOverlappingThis(e.getPoint())){
+				spirit.onMouseClickedOverThis(e);
+			}
+		}
+	}
+
+	public void callOnMouseEntered(MouseEvent e) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseEntered(e);
+			if (spirit.isPointOverlappingThis(e.getPoint())){
+				spirit.onMouseEnteredOverThis(e);
+			}
+		}
+	}
+
+	public void callOnMouseExited(MouseEvent e) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseExited(e);
+			if (spirit.isPointOverlappingThis(e.getPoint())){
+				spirit.onMouseExitedOverThis(e);
+			}
+		}
+	}
+
+	public void callOnMousePressed(MouseEvent e) {
+		for (Spirit spirit : spiritList){
+			spirit.onMousePressed(e);
+			if (spirit.isPointOverlappingThis(e.getPoint())){
+				spirit.onMousePressedOverThis(e);
+			}
+		}
+	}
+
+	public void callOnMouseReleased(MouseEvent e) {
+		for (Spirit spirit : spiritList){
+			spirit.onMouseReleased(e);
+			if (spirit.isPointOverlappingThis(e.getPoint())){
+				spirit.onMouseReleasedOverThis(e);
+			}
 		}
 	}
 	

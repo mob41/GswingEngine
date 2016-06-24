@@ -11,20 +11,26 @@ import java.awt.event.MouseMotionListener;
 import com.github.mob41.gswingengine.spirit.SpiritManager;
 
 public class InputHandler implements KeyListener, MouseListener, MouseMotionListener, FocusListener {
+	
+	private final SpiritManager sm;
+	
+	public InputHandler(SpiritManager spiritMan){
+		this.sm = spiritMan;
+	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		SpiritManager.getInstance().callOnKeyPressed(arg0);
+		sm.callOnKeyPressed(arg0);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		SpiritManager.getInstance().callOnKeyReleased(arg0);
+		sm.callOnKeyReleased(arg0);
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		SpiritManager.getInstance().callOnKeyTyped(arg0);
+		sm.callOnKeyTyped(arg0);
 	}
 
 	@Override
@@ -41,44 +47,37 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseDragged(arg0);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseMoved(arg0);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseClicked(e);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseEntered(e);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseExited(e);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMousePressed(e);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		sm.callOnMouseReleased(e);
 	}
 
 }
