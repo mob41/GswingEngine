@@ -3,6 +3,7 @@ package com.github.mob41.gswingengine.ui;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.github.mob41.gswingengine.input.KeyHandler;
@@ -12,17 +13,16 @@ import com.github.mob41.gswingengine.spirit.SpiritManager;
 public class GamePanel extends JPanel {
 	
 	private RenderThread thread;
+	
+	private JFrame frame;
 
 	/**
 	 * Create the panel.
 	 */
-	public GamePanel() {
-		System.err.println("I am adding a HANDLER!");
-		System.err.println("HANDLER ADDED!");
-		System.err.println("STARTING THREAD!!");
+	public GamePanel(JFrame frame) {
+		frame.addKeyListener(new KeyHandler());
 		thread = new RenderThread(this);
 		thread.start();
-		System.err.println("Thread STARTED!");
 	}
 	
 	@Override
