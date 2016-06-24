@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public abstract class Spirit {
+public abstract class Sprite {
 
 	private String name;
 	
@@ -14,7 +14,7 @@ public abstract class Spirit {
 	
 	private BufferedImage frame;
 	
-	public Spirit(String name, Point location){
+	public Sprite(String name, Point location){
 		if (location == null){
 			System.err.println("GswingEngine: SpiritManager: Location cannot be null.");
 			System.exit(-1);
@@ -79,11 +79,11 @@ public abstract class Spirit {
 		return new Point((getLeftX() + getRightX()) / 2, (getUpY() + getDownY()) / 2);
 	}
 	
-	public boolean isOverlapping(Spirit anotherSpirit){
+	public boolean isOverlapping(Sprite anotherSpirit){
 		return isInArea(getLeftX(), getRightX(), getUpY(), getDownY(), anotherSpirit.location);
 	}
 	
-	public boolean isCollisionWith(Spirit anotherSpirit){
+	public boolean isCollisionWith(Sprite anotherSpirit){
 		return isInArea(getLeftX(), getRightX(), getUpY(), getDownY(), anotherSpirit.location);
 	}
 	
@@ -174,10 +174,10 @@ public abstract class Spirit {
 	}
 	
 	public boolean isPointOverlappingThis(Point location){
-		return getLeftX() > location.x &&
-				getRightX() < location.x &&
-				getUpY() > location.y &&
-				getDownY() < location.y;
+		return getLeftX() < location.x &&
+				getRightX() > location.x &&
+				getUpY() < location.y &&
+				getDownY() > location.y;
 	}
 	
 	public static boolean isInArea(int areaLeftX, int areaRightX, int areaUpY, int areaDownY, Point location){

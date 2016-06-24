@@ -8,13 +8,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import com.github.mob41.gswingengine.spirit.SpiritManager;
+import com.github.mob41.gswingengine.spirit.SpriteManager;
 
 public class InputHandler implements KeyListener, MouseListener, MouseMotionListener, FocusListener {
 	
-	private final SpiritManager sm;
+	private final SpriteManager sm;
 	
-	public InputHandler(SpiritManager spiritMan){
+	public InputHandler(SpriteManager spiritMan){
 		this.sm = spiritMan;
 	}
 

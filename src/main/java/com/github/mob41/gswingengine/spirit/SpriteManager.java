@@ -9,27 +9,27 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class SpiritManager {
+public class SpriteManager {
 	
 	public static final int DEFAULT_MAXIMUM = 50;
 	
-	private static SpiritManager spiritManager = new SpiritManager(50);
+	private static SpriteManager spiritManager = new SpriteManager(50);
 	
-	private List<Spirit> spiritList;
+	private List<Sprite> spiritList;
 
-	public SpiritManager(int max){
-		spiritList = new ArrayList<Spirit>(max);
+	public SpriteManager(int max){
+		spiritList = new ArrayList<Sprite>(max);
 	}
 	
-	public static SpiritManager getInstance(){
+	public static SpriteManager getInstance(){
 		return spiritManager;
 	}
 	
-	public List<Spirit> getList(){
+	public List<Sprite> getList(){
 		return spiritList;
 	}
 	
-	public void addSpirit(Spirit spirit){
+	public void addSpirit(Sprite spirit){
 		spiritList.add(spirit);
 	}
 	
@@ -37,30 +37,30 @@ public class SpiritManager {
 		spiritList.remove(index);
 	}
 	
-	public Spirit getSpirit(int index){
+	public Sprite getSpirit(int index){
 		return spiritList.get(index);
 	}
 	
 	public void callOnKeyPressed(KeyEvent arg0){
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onKeyPressed(arg0);
 		}
 	}
 	
 	public void callOnKeyReleased(KeyEvent arg0){
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onKeyReleased(arg0);
 		}
 	}
 	
 	public void callOnKeyTyped(KeyEvent arg0){
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onKeyTyped(arg0);
 		}
 	}
 	
 	public void callOnMouseDragged(MouseEvent arg0) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseDragged(arg0);
 			if (spirit.isPointOverlappingThis(arg0.getPoint())){
 				spirit.onMouseDraggedOverThis(arg0);
@@ -69,7 +69,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMouseMoved(MouseEvent arg0) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseMoved(arg0);
 			if (spirit.isPointOverlappingThis(arg0.getPoint())){
 				spirit.onMouseMovedOverThis(arg0);
@@ -78,7 +78,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMouseClicked(MouseEvent e) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseClicked(e);
 			if (spirit.isPointOverlappingThis(e.getPoint())){
 				spirit.onMouseClickedOverThis(e);
@@ -87,7 +87,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMouseEntered(MouseEvent e) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseEntered(e);
 			if (spirit.isPointOverlappingThis(e.getPoint())){
 				spirit.onMouseEnteredOverThis(e);
@@ -96,7 +96,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMouseExited(MouseEvent e) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseExited(e);
 			if (spirit.isPointOverlappingThis(e.getPoint())){
 				spirit.onMouseExitedOverThis(e);
@@ -105,7 +105,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMousePressed(MouseEvent e) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMousePressed(e);
 			if (spirit.isPointOverlappingThis(e.getPoint())){
 				spirit.onMousePressedOverThis(e);
@@ -114,7 +114,7 @@ public class SpiritManager {
 	}
 
 	public void callOnMouseReleased(MouseEvent e) {
-		for (Spirit spirit : spiritList){
+		for (Sprite spirit : spiritList){
 			spirit.onMouseReleased(e);
 			if (spirit.isPointOverlappingThis(e.getPoint())){
 				spirit.onMouseReleasedOverThis(e);

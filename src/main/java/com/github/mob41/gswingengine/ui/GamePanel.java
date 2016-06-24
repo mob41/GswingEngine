@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.github.mob41.gswingengine.input.InputHandler;
-import com.github.mob41.gswingengine.spirit.Spirit;
-import com.github.mob41.gswingengine.spirit.SpiritManager;
+import com.github.mob41.gswingengine.spirit.Sprite;
+import com.github.mob41.gswingengine.spirit.SpriteManager;
 
 public class GamePanel extends JPanel {
 	
@@ -33,7 +33,7 @@ public class GamePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public GamePanel(JFrame frame) {
-		InputHandler ih = new InputHandler(SpiritManager.getInstance());
+		InputHandler ih = new InputHandler(SpriteManager.getInstance());
 		frame.addKeyListener(ih);
 		frame.addFocusListener(ih);
 		frame.addMouseListener(ih);
@@ -89,7 +89,7 @@ public class GamePanel extends JPanel {
 			}
 		} 
 		
-		for(Spirit spirit : SpiritManager.getInstance().getList()){
+		for(Sprite spirit : SpriteManager.getInstance().getList()){
 			spirit.drawThis(g2);
 		}
 		frame.setTitle("FPS: " + thread.getFPS() + " fps");

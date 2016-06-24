@@ -24,12 +24,12 @@ public class RenderThread extends Thread {
 	public void run(){
 		if (!running){
 			running = true;
-			time_start = System.nanoTime();
+			time_start = System.currentTimeMillis();
 			while (running){
 				gamePanel.repaint();
 				frame_rendered++;
-				time_now = System.nanoTime();
-				int sec = (int) TimeUnit.NANOSECONDS.toSeconds(time_now - time_start);
+				time_now = System.currentTimeMillis();
+				int sec = (int) (time_now - time_start);
 				fps = (int) (frame_rendered / (sec == 0 ? 1 : sec));
 			}
 		}
