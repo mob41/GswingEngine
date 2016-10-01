@@ -28,6 +28,8 @@ public class GamePanel extends JPanel {
 	private int BG_REPEAT = BG_NO_REPEAT;
 	
 	private JFrame frame;
+	
+	private String title = "GSE-GameSwingEngine";
 
 	/**
 	 * Create the panel.
@@ -61,6 +63,7 @@ public class GamePanel extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g){
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
 		g2.clearRect(0, 0, getWidth(), getHeight());
@@ -92,7 +95,11 @@ public class GamePanel extends JPanel {
 		for(Sprite spirit : SpriteManager.getInstance().getList()){
 			spirit.drawThis(g2);
 		}
-		frame.setTitle("FPS: " + thread.getFPS() + " fps");
+		frame.setTitle(title + " [" + thread.getFPS() + " fps]");
+	}
+	
+	public boolean isSpriteInViewArea(Sprite sprite){
+		return Sprite.isInArea(0, getWidth(), 0, getHeight(), sprite.getCenterPos());
 	}
 
 }

@@ -4,7 +4,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
+
+import com.github.mob41.gswingengine.ui.GamePanel;
 
 public abstract class Sprite {
 
@@ -12,15 +13,40 @@ public abstract class Sprite {
 	
 	private Point location;
 	
-	private BufferedImage frame;
+	private SpriteImage frame = null;
 	
-	public Sprite(String name, Point location){
+	private SpriteImage defaultFrame = null;
+	
+	private GamePanel panel;
+	
+	private AnimationImage walkFrames[] = null;
+	
+	private AnimationImage walkLeftFrames[] = null;
+	
+	private AnimationImage walkRightFrames[] = null;
+	
+	private AnimationImage walkUpFrames[] = null;
+	
+	private AnimationImage walkDownFrames[] = null;
+	
+	private AnimationImage stopFrames[] = null;
+	
+	private AnimationImage appearFrames[] = null;
+	
+	private AnimationImage disappearFrames[] = null;
+	
+	public Sprite(GamePanel panel, String name, Point location){
 		if (location == null){
 			System.err.println("GswingEngine: SpiritManager: Location cannot be null.");
 			System.exit(-1);
 		}
+		this.panel = panel;
 		this.name = name;
 		this.location = location;
+	}
+	
+	public GamePanel getGamePanel(){
+		return panel;
 	}
 	
 	public String getName(){
@@ -31,7 +57,7 @@ public abstract class Sprite {
 		return location;
 	}
 	
-	public BufferedImage getFrame(){
+	public SpriteImage getFrame(){
 		return frame;
 	}
 	
@@ -47,16 +73,24 @@ public abstract class Sprite {
 		setLocation(new Point(point.x - getWidth() / 2, point.y - getHeight() / 2));
 	}
 	
-	public void setFrame(BufferedImage frame){
+	public void setWalkFrames(AnimationImage[] frames){
+		this.walkFrames = frames;
+	}
+	
+	public void setFrame(SpriteImage frame){
 		this.frame = frame;
 	}
 	
+	public void setDefaultFrame(SpriteImage frame){
+		this.defaultFrame = frame;
+	}
+	
 	public int getWidth(){
-		return frame.getWidth();
+		return frame.getImage().getWidth();
 	}
 	
 	public int getHeight(){
-		return frame.getHeight();
+		return frame.getImage().getHeight();
 	}
 	
 	public int getLeftX(){
@@ -64,7 +98,7 @@ public abstract class Sprite {
 	}
 	
 	public int getRightX(){
-		return location.x + frame.getWidth();
+		return location.x + frame.getImage().getWidth();
 	}
 	
 	public int getUpY(){
@@ -72,7 +106,11 @@ public abstract class Sprite {
 	}
 	
 	public int getDownY(){
-		return location.y + frame.getWidth();
+		return location.y + frame.getImage().getWidth();
+	}
+	
+	public Point getPos(){
+		return new Point(getLeftX(), getUpY());
 	}
 	
 	public Point getCenterPos(){
@@ -88,19 +126,45 @@ public abstract class Sprite {
 	}
 	
 	public void moveLeft(int percentage){
-		location.x -= frame.getWidth() * percentage / 100 * 0.5;
+		if (walkFrames == null){
+			location.x -= defaultFrame.getImage().getWidth() * percentage / 100 * 0.5;
+		} else {
+			location.x -= defaultFrame.getImage().getWidth() * percentage / 100 * 0.5;
+			new Thread(){
+				public void run(){
+					for (int i = 0; i < walkFrames.length; i++){
+						setFrame(walkFrames[i]);
+						try {
+							sleep(50);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					setFrame(defaultFrame);
+				}
+			}.start();
+		}
 	}
 	
 	public void moveRight(int percentage){
-		location.x += frame.getWidth() * percentage / 100 * 0.5;
+		if (walkFrames == null){
+			location.x += defaultFrame.getImage().getWidth() * percentage / 100 * 0.5;
+		} else {
+			for (int i = 0; i < walkFrames.length; i++){
+				setFrame(walkFrames[i]);
+				location.x += defaultFrame.getImage().getWidth() * percentage / 100 * 0.5 / walkFrames.length;
+			}
+			setFrame(defaultFrame);
+		}
 	}
 	
 	public void moveUp(int percentage){
-		location.y -= frame.getHeight() * percentage / 100 * 0.5;
+		location.y -= frame.getImage().getHeight() * percentage / 100 * 0.5;
 	}
 	
 	public void moveDown(int percentage){
-		location.y += frame.getHeight() * percentage / 100 * 0.5;
+		location.y += frame.getImage().getHeight() * percentage / 100 * 0.5;
 	}
 	
 //Events
@@ -174,20 +238,24 @@ public abstract class Sprite {
 	}
 	
 	public boolean isPointOverlappingThis(Point location){
-		return getLeftX() < location.x &&
-				getRightX() > location.x &&
-				getUpY() < location.y &&
-				getDownY() > location.y;
+		return getLeftX() > location.x &&
+				getRightX() < location.x &&
+				getUpY() > location.y &&
+				getDownY() < location.y;
 	}
 	
 	public static boolean isInArea(int areaLeftX, int areaRightX, int areaUpY, int areaDownY, Point location){
-		return areaLeftX > location.x &&
-				areaRightX < location.x &&
-				areaUpY > location.y &&
-				areaDownY < location.y;
+		return areaLeftX < location.x &&
+				areaRightX > location.x &&
+				areaUpY < location.y &&
+				areaDownY > location.y;
 	}
 	
 	public final void drawThis(Graphics g){
-		g.drawImage(frame, getLeftX(), getUpY(), null);
+		if (frame == null){
+			//Skip render if null
+			return;
+		}
+		g.drawImage(frame.getImage(), getLeftX(), getUpY(), null);
 	}
 }

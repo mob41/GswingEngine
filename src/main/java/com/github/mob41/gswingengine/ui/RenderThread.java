@@ -29,9 +29,10 @@ public class RenderThread extends Thread {
 				gamePanel.repaint();
 				frame_rendered++;
 				time_now = System.currentTimeMillis();
-				int sec = (int) (time_now - time_start);
-				fps = (int) (frame_rendered / (sec == 0 ? 1 : sec));
+				float sec = (time_now - time_start) / 1000;
+				fps = (int) (frame_rendered / sec);
 			}
+			running = false;
 		}
 	}
 	
